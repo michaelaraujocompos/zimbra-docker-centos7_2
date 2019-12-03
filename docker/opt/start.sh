@@ -144,8 +144,7 @@ echo "Extracting files from the archive"
 tar xzvf /opt/zimbra-install/zimbra.tar.gz -C /opt/zimbra-install/
 
 echo "Installing Zimbra Collaboration just the Software"
-cd /opt/zimbra-install/zcs-* && ./install.sh 
-#-s < /opt/zimbra-install/installZimbra-keystrokes
+cd /opt/zimbra-install/zcs-* && ./install.sh -s < /opt/zimbra-install/installZimbra-keystrokes
 
 # Work around install issues.
 mkdir -p /opt/zimbra/common/lib/jvm/java/jre/lib/security
