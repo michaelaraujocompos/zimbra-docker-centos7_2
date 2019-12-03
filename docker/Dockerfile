@@ -1,5 +1,5 @@
 #################################################################
-# Dockerfile to build Zimbra Collaboration 8.8 container images
+# Dockerfile to build Zimbra Collaboration 8.8.x container images
 # Based on CentOS 7
 # Created by Alan Denniston
 #################################################################
