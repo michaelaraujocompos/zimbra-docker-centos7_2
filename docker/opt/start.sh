@@ -153,8 +153,8 @@ chown -R zimbra:zimbra /opt/zimbra/common/lib/jvm/java/jre/lib/security
 echo "Installing Zimbra Collaboration injecting the configuration"
 /opt/zimbra/libexec/zmsetup.pl -c /opt/zimbra-install/installZimbraScript
 
-#echo "Adding ZetAlliance Repository"
-#wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/#epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-#zimlets-epel-7.repo
+echo "Adding ZetAlliance Repository"
+wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/#epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-#zimlets-epel-7.repo
 
 #echo "Installing zimbra-patch"
 #yum clean metadata
@@ -167,8 +167,8 @@ su - zimbra -c 'zmcontrol restart'
 echo "yum clean all"
 yum clean all
 
-#echo "Replacing Installer Script with Start Script"
-#mv /opt/start.sh /opt/start.sh_installer && mv /opt/start.sh_postinstall /#opt/start.sh
+echo "Replacing Installer Script with Start Script"
+mv /opt/start.sh /opt/start.sh_installer && mv /opt/start.sh_postinstall /opt/start.sh
 
 echo "Removing Install Files"
 cd ~
