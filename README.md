@@ -15,13 +15,13 @@ One of the advantages of using docker is that the host OS does not matter, the c
 ## Downloading the image
 The first step is to pull this image into your docker environment, for that just run the next:
 ```bash
-docker pull busybox42/zimbra-docker-centos
+
 ```
 
 ## Creating Zimbra Containers
 Now that we have an image called busybox42/zimbra-docker-centos we can do a docker run with some special parameters, like this:
 ```bash
-docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 busybox42/zimbra-docker-centos
+docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 zimbra_docker_centos7_compos
 ```
 As you can see we tell the container the ports we want to expose, and on which port, we also specify the container hostname, the password foir the Zimbra Administrator Account, and the image to use.
 
@@ -43,12 +43,12 @@ If you like to contribute to the project, you are free to do so, just fork this 
 Download from github, you will need git installed on your OS
 
 ```bash
-git clone https://github.com/busybox42/zimbra-docker-centos.git
+git clone git@github.com:Gt180Full2/zimbra-docker-centos7_2.git
 ```
 ### Using wget
 For those who want to use wget, follow the next instructions to download the Zimbra-docker package. You might need wget and unzip installed on your OS
 ```bash
-wget https://github.com/busybox42/zimbra-docker-centos/archive/master.zip
+wget https://github.com/Gt180Full2/zimbra-docker-centos7_2/archive/master.zip
 unzip master.zip
 ```
 
@@ -56,7 +56,7 @@ unzip master.zip
 The `Makefile` in the docker/ directory provides you with a convenient way to build your docker image. You will need make on your OS. Just run
 
 ```bash
-cd zimbra-docker-centos/docker
+cd zimbra-docker-centos7_compos/docker
 sudo make
 ```
 
@@ -69,12 +69,12 @@ docker run -p PORTS -h HOSTNAME.DOMAIN --dns DNSSERVER -i -t -e PASSWORD=YOURPAS
 ```
 Example:
 ```bash
-docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 zimbra_docker_centos
+docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 zimbra_docker_centos7_compos
 ```
 Depending out your limits settings you may need to add a --ulimits option.
 Example:
 ```bash
-docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 --ulimit nofile=524288:524288 zimbra_docker_centos
+docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 --ulimit nofile=524288:524288 zimbra_docker_centos7_compos
 ```
 
 This will create the container in few seconds, and run automatically the start.sh:
