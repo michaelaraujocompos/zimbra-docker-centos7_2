@@ -5,6 +5,7 @@
 # Editado por Michael Robert
 #################################################################
 FROM centos:7
+MAINTAINER Alan Denniston <alan.denniston@gmail.com>
 
 RUN yum update -y --nogpgcheck && yum install -y --nogpgcheck \
   wget \
@@ -33,7 +34,6 @@ RUN yum update -y --nogpgcheck && yum install -y --nogpgcheck \
   openssh-server \
   && yum clean all \
   && yum clean metadata
-
 VOLUME ["/opt/zimbra"]
 
 EXPOSE 22 25 465 587 110 143 993 995 80 443 8080 8443 7071
