@@ -8,19 +8,6 @@ RANDOMHAM=$(date +%s|sha256sum|base64|head -c 10)
 RANDOMSPAM=$(date +%s|sha256sum|base64|head -c 10)
 RANDOMVIRUS=$(date +%s|sha256sum|base64|head -c 10)
 
-## Installing the DNS Server ##
-#echo "Configuring DNS Server"
-#mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old
-#cat <<EOF >>/etc/dnsmasq.conf
-#server=187.18.5.7
-#listen-address=127.0.0.1
-#domain=$DOMAIN
-#mx-host=$DOMAIN,$HOSTNAME.$DOMAIN,0
-#address=/$HOSTNAME.$DOMAIN/$CONTAINERIP
-#user=root
-#EOF
-#sudo systemctl restart dnsmasq
-
 ## setting up sshd server ##
 echo "Setting up sshd server."
 /usr/bin/ssh-keygen -A
@@ -154,12 +141,12 @@ echo "Installing Zimbra Collaboration injecting the configuration"
 /opt/zimbra/libexec/zmsetup.pl -c /opt/zimbra-install/installZimbraScript
 
 echo "Adding ZetAlliance Repository"
-wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/#epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-#zimlets-epel-7.repo
+wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-zimlets-epel-7.repo
 
-#echo "Installing zimbra-patch"
-#yum clean metadata
-#yum check-update
-#yum install zimbra-patch -y
+echo "Installing zimbra-patch"
+yum clean metadata
+yum check-update
+yum install zimbra-patch -y
 
 echo "Restarting Zimbra"
 su - zimbra -c 'zmcontrol restart'
