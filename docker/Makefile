@@ -1,4 +1,4 @@
-IMAGE=zimbra_docker_centos
+IMAGE=zimbra_docker_centos7_compos
 
 .PHONY: all build
 
