@@ -9,9 +9,9 @@ RANDOMSPAM=$(date +%s|sha256sum|base64|head -c 10)
 RANDOMVIRUS=$(date +%s|sha256sum|base64|head -c 10)
 
 ## setting up sshd server ##
-echo "Setting up sshd server."
-/usr/bin/ssh-keygen -A
-/sbin/sshd -D &
+#echo "Setting up sshd server."
+#/usr/bin/ssh-keygen -A
+#/sbin/sshd -D &
 
 ## Creating the Zimbra Collaboration Config File ##
 touch /opt/zimbra-install/installZimbraScript
@@ -106,7 +106,7 @@ zimbraFeatureBriefcasesEnabled="Enabled"
 zimbraFeatureTasksEnabled="Enabled"
 zimbraIPMode="ipv4"
 zimbraMailProxy="FALSE"
-zimbraMtaMyNetworks="127.0.0.0/8 $CONTAINERIP/32 [::1]/128"
+zimbraMtaMyNetworks="127.0.0.0/8 $CONTAINERIP/32 [::1]/128 [fe80::]/64"
 zimbraPrefTimeZoneId="America/Bahia"
 zimbraReverseProxyLookupTarget="TRUE"
 zimbraVersionCheckInterval="1d"
@@ -128,36 +128,39 @@ wget -O /opt/zimbra-install/zimbra.tar.gz https://files.zimbra.com/downloads/8.8
 echo "Extracting files from the archive"
 tar xzvf /opt/zimbra-install/zimbra.tar.gz -C /opt/zimbra-install/
 
+echo "Update package cache"
+yum update -y
+
 echo "Installing Zimbra Collaboration just the Software"
 cd /opt/zimbra-install/zcs-* && ./install.sh -s < /opt/zimbra-install/installZimbra-keystrokes
 
 # Work around install issues.
-mkdir -p /opt/zimbra/common/lib/jvm/java/jre/lib/security
-chown -R zimbra:zimbra /opt/zimbra/common/lib/jvm/java/jre/lib/security
+#mkdir -p /opt/zimbra/common/lib/jvm/java/jre/lib/security
+#chown -R zimbra:zimbra /opt/zimbra/common/lib/jvm/java/jre/lib/security
 
 echo "Installing Zimbra Collaboration injecting the configuration"
 /opt/zimbra/libexec/zmsetup.pl -c /opt/zimbra-install/installZimbraScript
 
-echo "Adding ZetAlliance Repository"
-wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-zimlets-epel-7.repo
+#echo "Adding ZetAlliance Repository"
+#wget https://copr.fedorainfracloud.org/coprs/zetalliance/zimlets/repo/epel-7/zetalliance-zimlets-epel-7.repo -O /etc/yum.repos.d/zetalliance-zimlets-epel-7.repo
 
-echo "Installing zimbra-patch"
-yum clean metadata
-yum check-update
-yum install zimbra-patch -y
+#echo "Installing zimbra-patch"
+#yum clean metadata
+#yum check-update
+#yum install zimbra-patch -y
 
 echo "Restarting Zimbra"
 su - zimbra -c 'zmcontrol restart'
 
-echo "yum clean all"
-yum clean all
+#echo "yum clean all"
+#yum clean all
 
-echo "Replacing Installer Script with Start Script"
-mv /opt/start.sh /opt/start.sh_installer && mv /opt/start.sh_postinstall /opt/start.sh
+#echo "Replacing Installer Script with Start Script"
+#mv /opt/start.sh /opt/start.sh_installer && mv /opt/start.sh_postinstall /opt/start.sh
 
-echo "Removing Install Files"
-cd ~
-rm -rf /opt/zimbra-install
+#echo "Removing Install Files"
+#cd ~
+#rm -rf /opt/zimbra-install
 
 if [[ $1 == "-d" ]]; then
   while true; do sleep 1000; done
